@@ -1,0 +1,5 @@
+{% extends 'CoreBundle:Emails:mail.base.html.twig' %}
+
+{% block yeld %}
+    Your bookins({{ appointment.startDate|date(date_time_formats.date_time_with_timezone) }} - {{ appointment.endDate|date(date_time_formats.date_time_with_timezone) }}) was rejected by Expert({{  expertUser.fullName }}). Please select another time or find new Expert.
+{% endblock %}

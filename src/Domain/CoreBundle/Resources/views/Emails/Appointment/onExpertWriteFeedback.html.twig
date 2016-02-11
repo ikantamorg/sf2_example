@@ -1,0 +1,5 @@
+{% extends 'CoreBundle:Emails:mail.base.html.twig' %}
+
+{% block yeld %}
+    You'v got new feedback from expert - {{ candidate.fullName }}. <a href="{{ url('candidate_after_appointment_feedback', {appointmentId: appointment.id}) }}">Click here to view it.</a>
+{% endblock %}

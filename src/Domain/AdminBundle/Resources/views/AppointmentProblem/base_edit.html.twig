@@ -1,0 +1,112 @@
+{#
+
+This file is part of the Sonata package.
+
+(c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+{% extends base_template %}
+
+{% block title %}
+    {% if admin.id(object) is not null %}
+        {{ "title_edit"|trans({'%name%': admin.toString(object) }, 'SonataAdminBundle') }}
+    {% else %}
+        {{ "title_create"|trans({}, 'SonataAdminBundle') }}
+    {% endif %}
+{% endblock%}
+
+{% block actions %}
+    <div class="sonata-actions btn-group">
+        {% include 'SonataAdminBundle:Button:show_button.html.twig' %}
+        {% include 'SonataAdminBundle:Button:history_button.html.twig' %}
+        {% include 'SonataAdminBundle:Button:acl_button.html.twig' %}
+        {% include 'SonataAdminBundle:Button:create_button.html.twig' %}
+        {% include 'SonataAdminBundle:Button:list_button.html.twig' %}
+    </div>
+{% endblock %}
+
+{% block side_menu %}{{ knp_menu_render(admin.sidemenu(action), {'currentClass' : 'active'}, 'list') }}{% endblock %}
+
+{% use 'AdminBundle:AppointmentProblem:base_edit_form.html.twig' with form as parentForm %}
+
+{% block form %}
+    {{ block('parentForm') }}
+{% endblock %}
+
+{% block tab_info %}
+    <style type="text/css">
+        .controls.pt{
+            padding-top: 7px;
+        }
+    </style>
+    <fieldset>
+        <div class="sonata-ba-collapsed-fields">
+            <div class="control-group">
+                <label class="control-label">Created:</label>
+                <div class="controls pt" >
+                    {{ object.createdAt|date('F jS \\a\\t g:ia') }}
+                </div>
+            </div>
+
+        </div>
+    </fieldset>
+    {% if object.user is defined %}
+        <fieldset>
+            <div class="sonata-ba-collapsed-fields">
+                <div class="control-group">
+                    <label class="control-label">User:</label>
+                    <div class="controls pt" >
+                        {{ object.user.fullName }} ( {{ object.user.email }} )
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    {% endif %}
+
+    {% if object.appointment is defined %}
+        <fieldset>
+            <div class="sonata-ba-collapsed-fields">
+                <div class="control-group">
+                    <label class="control-label">Appointment:</label>
+                    <div class="controls pt" >
+                        {{ object.readableTypeOfUser }} (appointment id#{{ object.appointment.id }})
+                    </div>
+                </div>
+
+            </div>
+        </fieldset>
+    {% endif %}
+
+    <fieldset>
+        <div class="sonata-ba-collapsed-fields">
+            <div class="control-group">
+                <label class="control-label">Problem:</label>
+                <div class="controls pt" >
+                    {{ object.message|raw }}
+                </div>
+            </div>
+
+        </div>
+    </fieldset>
+
+    <hr/>
+    {% if object.resolved and object.resolver is defined %}
+        <fieldset>
+            <div class="sonata-ba-collapsed-fields">
+                <div class="control-group">
+                    <label class="control-label">Resolved:</label>
+                    <div class="controls pt" >
+                        {{ object.resolvedAt|date('F jS \\a\\t g:ia') }}, By {{ object.resolver.fullName }} ( {{ object.resolver.email }} )
+                    </div>
+                </div>
+
+            </div>
+        </fieldset>
+        <hr/>
+    {% endif %}
+
+{% endblock %}

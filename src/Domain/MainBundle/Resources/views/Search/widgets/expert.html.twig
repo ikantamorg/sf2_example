@@ -1,0 +1,42 @@
+{% macro widget(expert) %}{% spaceless %}
+    {% from 'widgets/rating.html.twig' import rating_widget %}
+
+    {% set info = expert.additionalInfo %}
+
+    <article class="clearfix">
+        <div class="span2 outer-lft-none">
+            <img src="{{ image_preset(expert.user.avatar,'profile_medium') }}" alt="{{ expert.user.fullName }}" />
+        </div>
+        <div class="span6">
+            <h2 class="cf"><a href="{{ path('expert_public_profile', {expert_id: expert.id}) }}">{{ expert.user.fullName }}</a></h2>
+            <p>{{ info.headline }}</p>
+            <p>
+                <small class="meta">
+                    {% if expert.location %}
+                        {{  expert.location.name }}
+                    {% endif %}
+                    {% if expert.location and expert.industry %}
+                        &iota;
+                    {% endif %}
+                    {% if expert.industry %}
+                        {{  expert.industry.name }}
+                    {% endif %}
+                </small>
+            </p>
+            <div class="ratings clearfix">
+                <ul class="clearfix">
+                    <li>
+                        <p>
+                            {{ rating_widget(expert.averageRating) }}
+                        </p>
+                    </li>
+                </ul>
+            </div>
+            <!--/ ratings -->
+            {% if not is_granted('ROLE_EXPERT') %}
+                <a href="{{ path('expert_booking', {expert_id: expert.id}) }}" class="btn">Book Interview</a>
+            {% endif %}
+        </div>
+    </article>
+
+{% endspaceless %}{% endmacro %}

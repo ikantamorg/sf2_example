@@ -1,0 +1,27 @@
+<script id="{% block element_id %}template-toolbar{% endblock %}" type="text/template">
+    <div class="pull-right">
+        {% block status_buttons %}
+            <div class="pull-left selection-status">
+                <div class="btn-group customer calendar-statuses">
+                    <button class="btn active" data-state="all">
+                        <span>All Interviews</span>
+                    </button>
+                    <button class="btn" data-state="requested">
+                        <span class="blue"> <i></i> Requested</span>
+                    </button>
+                    <button class="btn" data-state="confirmed">
+                        <span class="green"> <i></i> Confirmed</span>
+                    </button>
+                    <button class="btn" data-state="need">
+                        <span class="red"> <i></i> Need Feedback</span>
+                    </button>
+                    <button class="btn" data-state="completed">
+                        <span class="grey"> <i></i> Completed</span>
+                    </button>
+                </div>
+            </div>
+        {% endblock %}
+        {% block view_buttons %}
+        {% endblock %}
+    </div>
+</script>

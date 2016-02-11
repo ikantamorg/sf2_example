@@ -1,0 +1,38 @@
+<form action="" method="post" autocomplete="off" novalidate>
+
+    <div class="pull-left session-info" id="box1">
+        <div class="header">
+            Sharpen Practice
+        </div>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+            nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
+            esse cillum dolore eu fugiat nulla pariatur. </p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+            labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+        <div class="footer-box">
+            <button type="submit" name="booking[data]" class="btn blue-btn" value="1">Continue</button>
+        </div>
+    </div><!-- /session-info-->
+    <div class="pull-left session-info last" id="box2">
+        <div class="header">
+            General Q&A Session
+        </div>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+            nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
+            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum.</p>
+        <div class="footer-box">
+            <button type="submit" name="booking[data]" class="btn blue-btn" value="0">Continue</button>
+        </div>
+    </div><!-- /session-info-->
+    <input type="hidden" name="booking[step]" value="{{ step }}"/>
+    <input type="hidden" name="booking[prefered_step]" value="{{ step+1 }}"/>
+    <div class="clearfix">
+    </div>
+    <br/>
+    <div class="control clearfix">
+        <input id="step_back" type="submit" value="Back" class="btn blue-btn pull-left">
+    </div>
+</form>

@@ -1,0 +1,58 @@
+{% macro dateRadios(name, values, prefix) %}{% spaceless %}
+<ul>
+    {% if values|length %}
+        {% for key, time_data in values %}
+            {% set id = 'date_radios_'~ prefix~ '_'~key %}
+            <li {% if loop.last %}class="last"{% endif %}>
+                <div class="control">
+                    <input value="{{ time_data.value }}" name="{{ name }}" type="radio" id="{{ id }}">
+                    <label for="{{ id }}">{{ time_data.label }}</label>
+                </div>
+            </li>
+        {% endfor %}
+    {% endif %}
+</ul>
+{% endspaceless %}{% endmacro %}
+
+{% import _self as forms %}
+
+{% set element_name = 'booking[data]' %}
+
+<form action="" method="POST" autocomplete="off">
+    <div class="toolbar">
+        <div class="pull-right textOutput">
+            <p>Select some available time</p>
+        </div><!-- /pull-right-->
+        <div class="date-time-line">
+            <span><i class="cd-icon"></i> {{ day_date|date('F j, Y') }}</span>
+        </div>
+    </div><!-- /toolbar-->
+    <div class="clear"></div>
+    <div class="TimeBlock">
+        <div class="pull-left time-item">
+            <div class="header">
+                Morning
+            </div>
+            {{ forms.dateRadios(element_name, time_ranges.morning, 'morning') }}
+        </div><!-- /time-item-->
+        <div class="pull-left time-item">
+            <div class="header">
+                Afternoon
+            </div>
+            {{ forms.dateRadios(element_name, time_ranges.afternoon, 'afternoon') }}
+        </div><!-- /time-item-->
+        <div class="pull-left time-item last">
+            <div class="header">
+                Evening
+            </div>
+            {{ forms.dateRadios(element_name, time_ranges.evening, 'evening') }}
+        </div><!-- /time-item-->
+        <div class="clear"></div>
+    </div><!-- /TimeBlock-->
+    <input type="hidden" name="booking[step]" value="{{ step }}"/>
+    <input type="hidden" name="booking[prefered_step]" value="{{ step+1 }}"/>
+    <div class="control clearfix">
+        <input type="submit" value="Continue" class="btn blue-btn pull-right">
+        <input id="step_back" type="submit" value="Back" class="btn blue-btn pull-left">
+    </div>
+</form>

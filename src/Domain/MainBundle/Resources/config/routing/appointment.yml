@@ -1,0 +1,11 @@
+appointment_public_available_days:
+    pattern: /abailable-days/{appointmentId}/{month}
+    defaults: { _controller: MainBundle:Appointment:availableDays }
+    options:
+            expose: true
+
+appointment_public_available_time:
+    pattern: /abailable-time/{appointmentId}/{day}
+    defaults: { _controller: MainBundle:Appointment:availableTime }
+    options:
+            expose: true

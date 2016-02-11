@@ -1,0 +1,183 @@
+{% extends '::base.html.twig' %}
+
+{% block title %} Main {% endblock %}
+
+{% from 'MainBundle:Search:widgets/search_widgets.html.twig' import top_select %}
+
+{% block yeld %}
+    <!-- intro -->
+    <section class="intro global-push-top-inner">
+        <!-- container -->
+        <div class="container">
+            <article class="text-center title">
+                <h1 class="cf">
+                    <span class="text-blue">Mock Interviews.</span>  Real Professionals.
+                </h1>
+                <h5>
+                    All {{ experts_count|number_format }} of our Experts are verified and have connected their
+                    <a class="dark-blue" href="#"><strong>LinkedIn</strong></a> profiles for you to see.
+                </h5>
+            </article>
+
+            <div class="search-field clearfix">
+                <form method="get" action="{{ path('search_expert') }}">
+                    <div class="field-block pull-left clearfix">
+                        <input type="text" placeholder="Add job title or keyword" name="search" value="{{ app.request.get('search', '') }}"/>
+                        <div class="btn-group pull-left">
+                            {{ top_select('top_category', industries) }}
+                        </div>
+                    </div>
+                    <button class="btn blue-btn pull-right" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+        <!--/ container -->
+    </section>
+    <!--/ intro -->
+
+    <div class="clear"></div>
+
+    <!-- featured -->
+    <section class="featured prel home clearfix">
+        <div class="white-fon"></div>
+        <div class="video-intro-holder">
+            <div class="video_block">
+                <div class="vendor">
+                    <iframe src="http://player.vimeo.com/video/25708134?title=0&amp;byline=0&amp;portrait=0" width="524" height="299" frameborder="0"></iframe>
+                </div>
+            </div><!-- /video_block-->
+        </div>
+        <div class="content-slider">
+            <div class="slider_block">
+                <ul id="slider">
+                    <li>
+                        <div class="title_slider"> <strong>Sharpen</strong> PRACTICE</div>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        </p>
+                        <a href="{{ path('become_expert') }}">
+                            <button type="button" class="btn blue-btn">Become an Expert</button>
+                        </a>
+                    </li>
+                    <li>
+                        <div class="title_slider"> <strong>Sharpen</strong> General Q&amp;A Session</div>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        </p>
+                        <a href="{{ path('become_expert') }}">
+                            <button type="button" class="btn blue-btn">Become an Expert</button>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <!-- container -->
+        <div class="container">
+            <div class="row">
+                <div class="span3 text-center">
+                    <h4>Find an Expert</h4>
+                    <p>
+                        Browse for real professionals in the industry and at the job level you want.
+                        Schedule a time that works for you.
+                    </p>
+                </div>
+
+                <div class="span3 text-center">
+                    <h4>Webcam Session</h4>
+                    <p>
+                        Do a live webcam mock interview and get priceless feedback that you can use
+                        in your real interview.
+                    </p>
+                    <br/>
+                    <a href="#" class="btn mid">Learn More</a>
+                </div>
+
+                <div class="span3 text-center">
+                    <h4>Expert Feedback</h4>
+                    <p>
+                        Enter the room as prepared as you possibly can be to maximize your chances
+                        to get the job you want.
+                    </p>
+                </div>
+
+            </div>
+            <div class="clear"></div>
+            <hr class="divider" />
+            <div class="clear"></div>
+
+            <div class="text-center">
+                <h3 class="text-blue cf">Got Experience?  Earn Money as a Sharpen Expert!</h3>
+                <h2>
+                    <small class="text-dgrey">
+                        Monetize your job experience and get satisfaction from helping others people prepare for their interviews
+                    </small>
+                </h2>
+                <a href="{{ path('become_expert') }}" class="btn blue-btn mid">Become an Expert</a>
+                <br/><br/>
+            </div>
+
+        </div>
+        <!--/ container -->
+    </section>
+    <!--/ featured -->
+
+    <!-- testimonials -->
+    <article class="testimonials grey-block brdr-tb inner-tb">
+        <div class="container">
+            <div class="thumb">
+                <img src="{{ asset('images/author.png') }}" alt="user-name" />
+            </div>
+            <div class="pull-left">
+                <em class="vijaya">
+                    "What an amazing service!  I did a couple sessions and found out about some stuff
+                    I really didn't know as well as I should.  Definitely was worth it."
+                </em>
+                <p class="meta author">
+                    <strong>Eric G</strong> Sharpen with <a href="#">Stuart Brown</a>
+                </p>
+            </div>
+        </div>
+    </article>
+    <!--/ testimonials -->
+
+    <div class="clear"></div>
+
+    <div class="partners inner-b">
+        <div class="container">
+            <h2><strong>Our Partners</strong></h2>
+            <ul class="inline">
+                <li>
+                    <a href="#" target="_blank">
+                        <img src="{{ asset('images/santander.png') }}" alt="santander">
+                    </a>
+                </li>
+                <li>
+                    <a href="#" target="_blank">
+                        <img src="{{ asset('images/the-times.png') }}" alt="The time">
+                    </a>
+                </li>
+                <li>
+                    <a href="#" target="_blank">
+                        <img src="{{ asset('images/twp.png') }}" alt="The Washington Post">
+                    </a>
+                </li>
+                <li>
+                    <a href="#" target="_blank">
+                        <img src="{{ asset('images/bbc.png') }}" alt="BBC">
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/main/js/home/index.js') }}"></script>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap-select.min.css') }}">
+{% endblock %}

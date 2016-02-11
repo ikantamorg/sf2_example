@@ -1,0 +1,31 @@
+# THIS ROUTE FOR IPN IS REQUIRED, others are optional
+# don't forget to set 'success' and 'cancel' urls in service parameters
+payment_ipn:
+    pattern: /ipn
+    defaults: { _controller: CoreBundle:Payment:ipn }
+
+# optional routes
+
+payment_initiate:
+    pattern: /initiate
+    defaults: { _controller: CoreBundle:Payment:initiate }
+
+payment_refund:
+    pattern: /refund
+    defaults: { _controller: CoreBundle:Payment:refund }
+
+payment_complete:
+    pattern: /complete
+    defaults: { _controller: CoreBundle:Payment:complete }
+
+payment_account:
+    pattern: /account
+    defaults: { _controller: CoreBundle:Payment:account }
+
+payment_success:
+    pattern: /success
+    defaults: { _controller: CoreBundle:Payment:success }
+
+payment_cancel:
+    pattern: /cancel
+    defaults: { _controller: CoreBundle:Payment:cancel }

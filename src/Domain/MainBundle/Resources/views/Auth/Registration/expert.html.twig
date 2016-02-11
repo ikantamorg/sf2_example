@@ -1,0 +1,109 @@
+{% extends '::base.html.twig' %}
+
+{% block title %} Become an Expert {% endblock %}
+
+{% block yeld %}
+
+    <!-- intro -->
+    <section class="static-push-top-inner">
+        <!-- container -->
+        <div class="container">
+            <article class="text-left title">
+                <h2 class="text-blue">Become an Expert</h2>
+                <div class="clear"></div>
+                <hr class="divider" />
+                <div class="clear"></div>
+            </article>
+        </div>
+        <!--/ container -->
+    </section>
+    <!--/ intro -->
+
+    <div class="clear"></div>
+
+    <!-- featured -->
+    <section class="featured prel inner-b clearfix">
+
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <!-- span12 -->
+                <div class="span12 text-center">
+                    <p class="text-lgrey">
+                        Becoming an Expert is simple.  Just connect to your LinkedIn account (required), add a quick greeting statement, and set your preferences for availability.
+                    </p>
+                    <br/>
+                    <a href="{{ path('hwi_oauth_connect') }}expert_linkedin" class="btn btn-large">
+                        <small class="inner-btn left"><i class="icon-linkedIn"></i></small>
+                        <span>Sign up with <strong>LinkedIn</strong></span>
+                    </a>
+                </div>
+                <!--/ span12 -->
+
+            </div>
+            <!--/ row -->
+        </div>
+        <!--/ container -->
+    </section>
+    <!--/ featured -->
+
+    <div class="clear"></div>
+
+    <!-- grey-block -->
+    <article class="grey-block inner-tb inner-t-shadow">
+        <!-- container -->
+        <div class="container">
+
+            <!-- inner-block -->
+            <div class="inner-block">
+                <h4 class="text-blue"><strong>Benefits for Experts</strong></h4>
+
+                <h4>Monetize your job experience</h4>
+                <p>
+                    By choosing Experts from your own industry, you will be tested on the knowledge that is specific to your industry, job function and level  of responsibility.
+                </p>
+            </div>
+            <!--/ inner-block -->
+
+            <!-- inner-block -->
+            <div class="inner-block clearfix">
+                <img class="pull-left" src="{{ asset('images/bag.png') }}" alt="Get video feedback" />
+                <h4>Get video feedback after your interview is over</h4>
+                <p>
+                    Unlike a real interview, where you never find out how you really came across, your session's experts will give you detailed, video feedback
+                </p>
+            </div>
+            <!--/ inner-block -->
+
+            <!-- inner-block -->
+            <div class="inner-block clearfix">
+                <img class="pull-left" src="{{ asset('images/flag.png') }}" alt="Help others" />
+                <h4>Help others prepare for interviews that can change their careers and lives</h4>
+                <p>
+                    Unlike a real interview, where you never find out how you really came across, your session's experts will give you detailed, video feedback.
+                </p>
+            </div>
+            <!--/ inner-block -->
+
+            <!-- inner-block -->
+            <div class="inner-block clearfix">
+                <img class="pull-left" src="{{ asset('images/charts.png') }}" alt="Improve your own interviewing" />
+                <h4>Improve your own interviewing skills for your real job</h4>
+                <p>
+                    If you like, you can do more sessions, incorporating the feedback from your Expert into each new session until you feel that you've prepared as much as you can.
+                </p>
+            </div>
+            <!--/ inner-block -->
+        </div>
+        <!--/ container -->
+
+
+    </article>
+    <!--/ grey-block -->
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

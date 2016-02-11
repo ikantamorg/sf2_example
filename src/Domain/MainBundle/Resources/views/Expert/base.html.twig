@@ -1,0 +1,76 @@
+{% extends 'MainBundle::base.html.twig' %}
+
+{% block yeld %}
+
+    <div class="clear"></div>
+
+    <div class="filter-block">
+        <div class="container">
+            <div class="exp-info clearfix">
+                <div class="avatar pull-left">
+                    <img src="{{ bigAvatarUrl }}" alt="{{ info.firstName }} {{ info.lastName }}">
+                </div>
+                <div class="pull-left">
+                    <div class="exp-name">{{ info.firstName }} {{ info.lastName }}</div>
+                    <p>{{ info.headline }}</p>
+                    <p class="silver">
+                        {% if expert.location %}
+                            {{  expert.location.name }}
+                        {% endif %}
+                        {% if expert.location and expert.industry %}
+                            &iota;
+                        {% endif %}
+                        {% if expert.industry %}
+                            {{  expert.industry.name }}
+                        {% endif %}
+                    </p>
+                </div>
+                <div class="pull-right">
+                    <div class="exp-info-panel">
+                        <i></i>
+                        <div class="price pull-left">${{ expert.price }}</div>
+                        <i class="separator pull-left"></i>
+                        <div class="time pull-left"> <i></i> 30 min</div><div class="clear"></div>
+                    </div>
+                    <a href="#" class="book_interview"></a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="clear"></div>
+
+    <div class="container static-push-top-outer">
+        <div class="tabs">
+
+            <div class="navigation">
+                <ul>
+                    <li>
+                        <a class="tb-btn {% if not app.user %}registration-required{% endif %}" {% if app.user %}href="{{ path('candidate_book_expert', {'exper_id': expert.id}) }}" {% endif %}>Book a Session</a>
+                    </li>
+                    <li class="tb-btn">
+                        <a class="tb-btn" href="{{ path('expert_public_profile', {
+                            'expertId': expert.id
+                        }) }}">
+                            Profile
+                        </a>
+                    </li>
+                    <li>
+                        <a class="tb-btn" href="{{ path('expert_public_reviews', {
+                            'expertId': expert.id
+                        }) }}">
+                            Reviews
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="blocks">
+                {% block blocks %}{% endblock blocks %}
+            </div>
+
+        </div>
+    </div>
+
+{% endblock yeld %}

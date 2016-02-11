@@ -1,0 +1,56 @@
+{% macro expert_header(expert) %}{% spaceless %}
+
+    {% from 'widgets/rating.html.twig' import rating_widget %}
+
+    {% set info = expert.additionalInfo %}
+    <!-- filter-block -->
+    <div class="filter-block">
+        <!-- container -->
+        <div class="container">
+            <div class="exp-info clearfix">
+                <div class="avatar pull-left">
+                    <img src="{{ image_preset(expert.user.avatar,'profile_big') }}" alt="{{ expert.user.fullName }}">
+                </div><!--/avatar-->
+                <div class="pull-left">
+                    <div class="exp-name">{{ expert.user.fullName }}</div>
+                    <p>{{ info.headline }}</p>
+                    <p class="silver">
+                        {% if expert.location %}
+                            {{  expert.location.name }}
+                        {% endif %}
+                        {% if expert.location and expert.industry %}
+                            &iota;
+                        {% endif %}
+                        {% if expert.industry %}
+                            {{  expert.industry.name }}
+                        {% endif %}
+                    </p>
+                    <ul class="clearfix">
+                        <li>
+                            <p class="pull-left">
+                                {{ rating_widget(expert.averageRating) }}
+                            </p>
+                            <span class="pull-left silver">
+                                &nbsp; {{ expert.reviews.count }} votes
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="pull-right">
+                    <div class="exp-info-panel">
+                        <i></i>
+                        <div class="price pull-left">${{ expert.price }}</div>
+                        <i class="separator pull-left"></i>
+                        <div class="time pull-left"> <i></i> 30 min</div><div class="clear"></div>
+                    </div>
+                    {% if app.request.get('_route') != 'expert_booking' and not is_granted('ROLE_EXPERT') %}
+                        <a href="{{ path('expert_booking',{expert_id: expert.id}) }}" class="book_interview"></a>
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+        <!--/ container -->
+    </div>
+    <!--/ filter-block -->
+{% endspaceless %}{% endmacro %}

@@ -1,0 +1,22 @@
+parameters:
+    cropperFilesLoader.filesPath: "bundles/ikantamimager/cropper"
+    cropperFilesLoader.class: Ikantam\ImagerBundle\Cropper\CropperFilesLoader
+    cropperFilesLoader.filesList:
+        css: ["%cropperFilesLoader.filesPath%/css/jquery.Jcrop.css"]
+        js: ["%cropperFilesLoader.filesPath%/js/jquery.Jcrop.js"]
+    uploaderFilesLoader.filesPath: "bundles/ikantamimager/uploader"
+    uploaderFilesLoader.class: Ikantam\ImagerBundle\Uploader\UploaderFilesLoader
+    uploaderFilesLoader.filesList:
+        css: ["%uploaderFilesLoader.filesPath%/css/jquery.fileupload-ui.css",  "%uploaderFilesLoader.filesPath%/css/style.css"]
+        js: ["%uploaderFilesLoader.filesPath%/js/vendor/jquery.ui.widget.js", "%uploaderFilesLoader.filesPath%/js/jquery.iframe-transport.js", "%uploaderFilesLoader.filesPath%/js/jquery.fileupload.js"]
+    imageLinkGenerator.class: Ikantam\ImagerBundle\Image\ImageLinkGenerator
+services:
+    uploaderFilesLoader:
+        class: %uploaderFilesLoader.class%
+        arguments: ["%uploaderFilesLoader.filesList%"]
+    cropperFilesLoader:
+        class: %cropperFilesLoader.class%
+        arguments: ["%cropperFilesLoader.filesList%"]
+    imageLinkGenerator:
+        class: %imageLinkGenerator.class%
+        arguments: ['@service_container']

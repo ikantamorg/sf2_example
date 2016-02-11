@@ -1,0 +1,35 @@
+main_home:
+    pattern:  /
+    defaults: { _controller: MainBundle:Home:index }
+
+auth:
+    resource: "@MainBundle/Resources/config/routing/auth.yml"
+    prefix: /auth
+
+expert:
+    resource: "@MainBundle/Resources/config/routing/expert.yml"
+    prefix: /experts
+
+search:
+    resource: "@MainBundle/Resources/config/routing/search.yml"
+    prefix: /search
+
+static_pages:
+    resource: "@MainBundle/Resources/config/routing/static_pages.yml"
+    prefix: /
+
+payment:
+    resource: "@MainBundle/Resources/config/routing/payment.yml"
+    prefix: /payment
+
+files:
+    resource: "@MainBundle/Resources/config/routing/file.yml"
+    prefix: /file
+
+expert:
+    resource: "@MainBundle/Resources/config/routing/expert.yml"
+    prefix: /experts
+
+appointments:
+    resource: "@MainBundle/Resources/config/routing/appointment.yml"
+    prefix: /appointments

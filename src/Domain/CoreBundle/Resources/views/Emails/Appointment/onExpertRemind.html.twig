@@ -1,0 +1,10 @@
+{% extends 'CoreBundle:Emails:mail.base.html.twig' %}
+
+{% block yeld %}
+    Hello {{ expert_user.fullName }}.
+    <br>
+    <br>
+    Your appointment with Candidate {{ candidate.fullName }}.
+    <br/>
+    It's going to start in {{ min_diff }} minutes at {{ appointment.startDate|date(date_time_formats.date_time_with_timezone) }}.
+{% endblock %}

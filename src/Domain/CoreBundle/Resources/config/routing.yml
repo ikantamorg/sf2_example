@@ -1,0 +1,25 @@
+upload_image:
+    pattern:  /upload/image
+    defaults: { _controller: CoreBundle:ImageUpload:index }
+    options:
+        expose: true
+
+upload_file:
+    pattern:  /upload/file
+    defaults: { _controller: CoreBundle:FileUpload:index }
+    options:
+        expose: true
+
+crop_image:
+    pattern:  /crop/image
+    defaults: { _controller: CoreBundle:ImageUpload:crop }
+    options:
+        expose: true
+
+domain_imager_generator:
+    pattern: /imager/generate/
+    defaults: { _controller: IkantamImagerBundle:ImagePreset:index }
+
+payment:
+    resource: "@CoreBundle/Resources/config/routes/payment.yml"
+    prefix: /payment

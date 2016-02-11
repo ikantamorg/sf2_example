@@ -1,0 +1,15 @@
+terms:
+    pattern:  /terms
+    defaults: { _controller: MainBundle:Terms:index }
+
+how_it_works:
+    pattern:  /how_it_works
+    defaults: { _controller: MainBundle:HowItWorks:index }
+
+faq:
+    pattern:  /faq
+    defaults: { _controller: MainBundle:Faq:index }
+
+contact_us:
+    pattern:  /contact_us
+    defaults: { _controller: MainBundle:ContactUs:index }

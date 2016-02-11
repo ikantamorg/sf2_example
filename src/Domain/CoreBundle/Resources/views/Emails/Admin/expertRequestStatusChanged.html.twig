@@ -1,0 +1,16 @@
+{% extends 'CoreBundle:Emails:mail.base.html.twig' %}
+
+{% block yeld %}
+    Your request to obtain the status of an experts was reviewed by the administrator.    <br>
+    Your request has been {% if expertRequestObject.status == 1 %} <span style="color: green"> APPROVED </span> {% else %} <span style="color: red"> DECLINED </span> {% endif %} by the administrator.
+    <br>
+    <br>
+    <hr>
+    {% if(expertRequestObject.message|length > 0) %}
+        <br>
+        Message from Administrator:
+        <br>
+        {{ expertRequestObject.message }}
+        <br>
+    {% endif %}
+{% endblock %}

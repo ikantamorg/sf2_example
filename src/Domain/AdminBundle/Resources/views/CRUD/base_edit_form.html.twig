@@ -1,0 +1,10 @@
+{% use 'SonataAdminBundle:CRUD:base_edit_form.html.twig' %}
+
+{% block formactions %}
+    <div class="well form-actions 323">
+        <input type="hidden" name="btn_update_and_list" value="1"/>
+        <button type="submit" class="btn btn-success" name="action" value="approve">Approve</button>
+        <a href="{{ admin.generateUrl('list') }}"><button class="btn" type="button">Cancel</button></a>
+        <button type="submit" class="btn btn-danger" name="action" value="decline">Decline</button>
+    </div>
+{% endblock formactions %}

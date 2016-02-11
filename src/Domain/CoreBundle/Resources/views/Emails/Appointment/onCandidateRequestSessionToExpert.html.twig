@@ -1,0 +1,5 @@
+{% extends 'CoreBundle:Emails:mail.base.html.twig' %}
+
+{% block yeld %}
+    You'v got new booking request from {{ candidate.fullName }}. <a href="{{ url('expert_appointments_index') }}?start={{ appointment.startDate|date('Y-m-d') }}&end={{ appointment.endDate|date('Y-m-d') }}&view=list">Click here to view it.</a>
+{% endblock %}

@@ -1,0 +1,118 @@
+{% extends 'MainBundle::base.html.twig' %}
+
+{% block title %} Sign Up {% endblock %}
+
+{% block yeld %}
+    <!-- container -->
+    <div class="container">
+        <h2 class="text-center cf inner-tb outer-btm-none">Sign Up</h2>
+
+        <form class="form-signin clearfix" novalidate="novalidate" method="POST">
+
+
+            <div class="control-group text-center">
+                <a href="{{ path('hwi_oauth_connect') }}linkedin" class="btn btn-large">
+                    <small class="inner-btn left"><i class="icon-linkedIn"></i></small>
+                    <span>Sign up with <strong>LinkedIn</strong></span>
+                </a>
+            </div>
+
+            <p class="or"><span>or</span></p>
+
+            <!-- control-group -->
+            <div class="control-group {{ form_custom_errors.div_class(form.first_name) }}">
+                {{ form_custom_errors.widget(form.first_name) }}
+                {{ form_custom_labels.widget(form.first_name) }}
+                <div class="controls">
+                    {{ form_widget(form.first_name) }}
+                </div>
+            </div>
+            <!--/ control-group -->
+
+            <!-- control-group -->
+            <div class="control-group {{ form_custom_errors.div_class(form.last_name) }}">
+                {{ form_custom_errors.widget(form.last_name) }}
+                {{ form_custom_labels.widget(form.last_name) }}
+                <div class="controls">
+                    {{ form_widget(form.last_name) }}
+                </div>
+            </div>
+            <!--/ control-group -->
+
+            <!-- control-group -->
+            <div class="control-group {{ form_custom_errors.div_class(form.email) }}">
+                {{ form_custom_errors.widget(form.email) }}
+                {{ form_custom_labels.widget(form.email) }}
+                <div class="controls">
+                    {{ form_widget(form.email) }}
+                </div>
+            </div>
+            <!--/ control-group -->
+
+            <!-- control-group -->
+            <div class="control-group {{ form_custom_errors.div_class(form.plainPassword) }}">
+                {{ form_custom_errors.widget(form.plainPassword.first) }}
+                {{ form_custom_labels.widget(form.plainPassword.first) }}
+                <div class="controls">
+                    {{ form_widget(form.plainPassword.first) }}
+                </div>
+            </div>
+            <!--/ control-group -->
+
+            <!-- control-group -->
+            <div class="control-group {{ form_custom_errors.div_class(form.plainPassword) }}">
+                {{ form_custom_errors.widget(form.plainPassword.second) }}
+                {{ form_custom_labels.widget(form.plainPassword.second) }}
+                <div class="controls">
+                    {{ form_widget(form.plainPassword.second) }}
+                </div>
+            </div>
+            <!--/ control-group -->
+
+            <!-- control-group -->
+            <div class="control-group {{ form_custom_errors.div_class(form.terms) }}">
+                <span class="inner-tb-10">
+                {{ form_custom_errors.widget(form.terms) }}
+                    {{ form_widget(form.terms) }}
+                    <small class="pull-left text-lgrey">I accept <a href="{{ url('terms') }}" data-toggle="modal" data-target="#terms-modal">Terms & Conditions</a></small>
+	        </span>
+            </div>
+            <!--/ control-group -->
+
+
+
+            <div class="clear"></div>
+
+            {{ form_rest(form) }}
+            <button class="btn blue-btn pull-right" type="submit">Sign in</button>
+
+        </form>
+
+    </div>
+    <!--/ container -->
+{% endblock %}
+
+
+{% block footer %} {% endblock %}
+
+{% block bottom_of_body %}
+    <div class="modal hide fade" id="terms-modal">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3>Terms & Conditions</h3>
+        </div>
+        <div class="modal-body">
+            <div class="text-center">
+                <span class="big-ajax-gray"></span>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/main/js/registration/index.js') }}"></script>
+{% endblock %}
+
+

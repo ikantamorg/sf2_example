@@ -1,0 +1,13 @@
+<script id="{% block element_id %}template-list{% endblock %}" type="text/template">
+    {% block date_range %}
+        <div class="date-range top-upped">
+            <input type="text" class="datepicker" id="datepicker_start">
+            <strong>-</strong>
+            <input type="text" class="datepicker" id="datepicker_end">
+        </div><!-- /date-range-->
+    {% endblock %}
+
+    {% block container %}
+        <div class="section-box" id="list-container"></div><!-- /section-box-->
+    {% endblock %}
+</script>

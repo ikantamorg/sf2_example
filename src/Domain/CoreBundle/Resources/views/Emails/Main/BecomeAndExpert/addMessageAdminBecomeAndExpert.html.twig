@@ -1,0 +1,7 @@
+{% extends 'CoreBundle:Emails:mail.base.html.twig' %}
+
+{% block yeld %}
+    User {{ user.getLastName() }} {{ user.getFirstName() }} sent expert request.<br>
+    Please use this link to either accept or reject it:
+    <u><a href="{{ url('expert_requests_edit', {'id': request.id}) }}" >Link</a></u>
+{% endblock %}

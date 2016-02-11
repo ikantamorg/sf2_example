@@ -1,0 +1,38 @@
+{% extends 'MainBundle::base.html.twig' %}
+
+{% block title %}Image Uploading{% endblock %}
+
+
+{% block yeld %}
+    {{ blueImpCss | raw }}
+    {{ cropperCss | raw }}
+    <!-- The fileinput-button span is used to style the file input field as button -->
+    <span class="btn btn-success fileinput-button">
+        <i class="icon-plus icon-white"></i>
+        <span>Select files...</span>
+        <!-- The file input field used as target for the file upload widget -->
+        <input id="fileupload" type="file" name="files[]" multiple>
+    </span>
+    <br>
+    <br>
+    <!-- The global progress bar -->
+    <div id="progress" class="progress progress-success progress-striped">
+        <div class="bar"></div>
+    </div>
+    <!-- The container for the uploaded files -->
+    <div id="files"></div>
+    <img src="" style="display: none" id="logoImage">
+    <form id="cropData" name="cropData" action="{{ cropUrl }}" method="POST">
+        <input type="hidden" name="cropData[xCoord]" id="xCoord">
+        <input type="hidden" name="cropData[yCoord]" id="yCoord">
+        <input type="hidden" name="cropData[width]" id="width">
+        <input type="hidden" name="cropData[height]" id="height">
+        <input type="hidden" name="imageLink" id="imageLink">
+        <input type="hidden" name="imageName" id="imageName">
+        <input type="submit" value="Save Image">
+    </form>
+    {{ blueImpJs | raw }}
+    {{ cropperJs | raw }}
+
+    <script src="{{ asset('bundles/imager/uploader/js/brandCreate.js') }}" type="text/javascript"></script>
+{% endblock %}

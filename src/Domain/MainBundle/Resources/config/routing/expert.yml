@@ -1,0 +1,19 @@
+expert_public_profile:
+    pattern:  /profile/{expert_id}
+    defaults: { _controller: MainBundle:Expert:profile }
+
+expert_booking:
+    path: /booking/{expert_id}
+    defaults: { _controller: MainBundle:Expert:booking }
+
+expert_booking_success_message:
+    path: /booking/{expert_id}/success
+    defaults: { _controller: MainBundle:Expert:successBooking }
+
+expert_public_reviews:
+    pattern: /reviews/{expertId}
+    defaults: { _controller: MainBundle:Expert:reviews }
+
+expert_public_available_days:
+    pattern: /reviews/{expertId}
+    defaults: { _controller: MainBundle:Expert:reviews }

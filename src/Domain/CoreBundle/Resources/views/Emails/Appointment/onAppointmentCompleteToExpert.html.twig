@@ -1,0 +1,15 @@
+{% extends 'CoreBundle:Emails:mail.base.html.twig' %}
+
+{% block yeld %}
+    Hello {{  expert_user.fullName }}.
+    <br>
+    <br>
+    You session booking with candidate {{ candidate.fullName }} ({{ appointment.startDate|date(date_time_formats.date_time_with_timezone) }} -  {{ appointment.endDate|date(date_time_formats.date_time_with_timezone) }}) was successfully completed.
+    {% if require_feedback %}
+        <br>
+        <br>
+        To receive payment please leave a feedback for candidate.
+        <br>
+        <a href="{{ url('expert_after_appointment_feedback', {appointmentId: appointment.id}) }}">Click here</a> to add it now.
+    {% endif %}
+{% endblock %}

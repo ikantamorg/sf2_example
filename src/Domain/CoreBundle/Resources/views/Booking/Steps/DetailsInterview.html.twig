@@ -1,0 +1,38 @@
+{% extends 'CoreBundle:Booking:Steps/AbstractDetails.html.twig' %}
+
+{% block form_body %}
+    <fieldset class="fields_to_fill">
+        {{ form_row(form.otherInfo) }}
+    </fieldset>
+    <fieldset class="fields_to_fill">
+        {{ form_row(form.resume) }}
+        <div class="control-group">
+            <label>Upload resume</label>
+            <div class="control type_file">
+                <input type="file"  class="inputFile" id="fileuploader" name="files"  disabled>
+                <div class="fonTypeFile"></div>
+                <input type="text" id="fileName" readonly="readonly" class="inputFileVal">
+            </div> <span class="silver">pdf, word</span>
+            <div ><div class="progress hidden" id="progress">
+                    <div class="bar"></div>
+                </div>
+                <span id="file_controls">
+                    {% if file %}
+                        <a>{{ file.name }}</a>
+                        <a class="remove_file" >Remove</a>
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset class="fields_to_fill">
+        {{ form_row(form.jobDescription) }}
+        <div class="control-group clearfix">
+            <div class="control">
+                <input type="submit" value="Continue" class="btn blue-btn pull-right">
+                <input id="step_back" type="submit" value="Back" class="btn blue-btn pull-left">
+            </div>
+        </div>
+    </fieldset>
+{% endblock %}

@@ -1,0 +1,5 @@
+twig:
+    globals:
+        global:
+            expert:
+                max_rating: "%expert.max_rating%"

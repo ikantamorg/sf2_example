@@ -1,0 +1,8 @@
+{% extends 'CoreBundle:Emails:mail.base.html.twig' %}
+
+{% block yeld %}
+    Hello {{ candidate.fullName }}.
+    <br>
+    <br>
+    You session booking with expert {{  expert_user.fullName }} ({{ appointment.startDate|date(date_time_formats.date_time_with_timezone) }} -  {{ appointment.endDate|date(date_time_formats.date_time_with_timezone) }}) was successfully completed.
+{% endblock %}

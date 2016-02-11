@@ -1,0 +1,144 @@
+parameters:
+    oauth_user_provider.class: Domain\CoreBundle\Security\Core\User\FOSUBUserProvider
+    socializer_base.class: Domain\CoreBundle\Service\Socializer\Linkedin\Linkedin
+    expert_manager.class: Domain\CoreBundle\Service\Expert\ExpertManager
+    expert_schedule.class: Domain\CoreBundle\Service\Expert\Schedule
+    domain.expert.search.class: Domain\CoreBundle\Service\Expert\Search
+    payment.class: Domain\CoreBundle\Service\Payment\PaymentService
+    domain.appointment.scheduler.class: Domain\CoreBundle\Service\Appointment\Scheduler
+    domain.appointment.manager.class: Domain\CoreBundle\Service\Appointment\Manager
+
+    domain.expert.scheduler.class: Domain\CoreBundle\Service\Expert\Scheduler
+    domain.booking.class: Domain\CoreBundle\Service\Booking\Booking
+
+    domain.core.event.listener.class: Domain\CoreBundle\Service\Event\PrimitiveEventListener
+    domain.core.job.manager.class: Domain\CoreBundle\Service\MQ\JobManager
+
+    domain.core.file_system.video.class: Domain\CoreBundle\Service\FileSystem\PrivateVideo
+
+    domain.core.appointment.video_manager.class: Domain\CoreBundle\Service\Appointment\VideoManager
+
+services:
+    dimain.maintenance_listener:
+        class: Domain\CoreBundle\Listener\MaintenanceListener
+        arguments: [ @doctrine.orm.entity_manager, @templating, @request ]
+        scope: request
+        tags:
+          - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 7 }
+
+    dimain.access_listener:
+        class: Domain\CoreBundle\Listener\AccessListener
+        arguments: [ @security.context, @router, @request ]
+        scope: request
+        tags:
+          - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest}
+
+    donan.core.exception.kernel.listener:
+        class:  Domain\CoreBundle\Listener\ExceptionListener
+        arguments: [%twig.exception_listener.controller%, @logger, @templating, @kernel, @security.context, @router]
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception, method: onKernelException, , priority: -10 }
+
+    security.authentication.provider.core:
+        class:  Domain\CoreBundle\Security\Provider\RoleAccessProvider
+        parent: security.authentication.provider.dao
+        abstract: true
+        public: false
+
+    monolog.formatter.html:
+        class: Monolog\Formatter\HtmlFormatter
+
+    core.type.hidden_entity:
+        class: Domain\CoreBundle\Form\Type\HiddenEntityType
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: form.type, alias: hidden_entity }
+
+    domain.menu_renderer.tabs:
+        class: Domain\CoreBundle\Service\Menu\MenuRendererTabsService
+        arguments:
+            - %knp_menu.renderer.list.options%
+        tags:
+            - { name: knp_menu.renderer, alias: tabs }
+
+    domain.menu_renderer.footer:
+            class: Domain\CoreBundle\Service\Menu\MenuRendererFooterService
+            arguments:
+                - %knp_menu.renderer.list.options%
+            tags:
+                - { name: knp_menu.renderer, alias: footer }
+
+    pp_mailer:
+        class: Domain\CoreBundle\Service\Mail\Mailer\Mailer
+        arguments: [@service_container]
+
+    oauth_user_provider:
+        class: "%oauth_user_provider.class%"
+        arguments: [@fos_user.user_manager,{ linkedin: linkedin_id, expert_linkedin: linkedin_id }, @service_container]
+
+    socializer_linkedin:
+        class: "%socializer_base.class%"
+
+    expert_manager:
+        class: %expert_manager.class%
+        arguments:
+            - @doctrine.orm.entity_manager
+            - @socializer_linkedin
+            - @domain.core.event.listener
+            - @i_downloader
+            - @i_uploaded_files_manager
+            - @image.upload.controller
+
+    expert_schedule:
+        class: %expert_schedule.class%
+        arguments: [@doctrine.orm.entity_manager]
+
+    image.upload.controller:
+        class: Domain\CoreBundle\Controller\ImageUploadController
+        calls:
+            - [setContainer, [@service_container]]
+
+    domain.booking:
+        class: %domain.booking.class%
+        arguments: [@service_container]
+
+    domain.expert.search:
+        class: %domain.expert.search.class%
+        arguments: [@service_container]
+
+    domain.expert.scheduler:
+            class: %domain.expert.scheduler.class%
+            arguments: [@doctrine.orm.entity_manager, %booking_scheduler%]
+
+    domain.content.image_preset:
+        class: Domain\CoreBundle\Twig\ImagePreset
+        arguments: [@service_container]
+        tags:
+              - { name: twig.extension }
+    payment:
+        class: %payment.class%
+        arguments: [@service_container, @doctrine.orm.entity_manager]
+
+    domain.appointment.scheduler:
+        class: %domain.appointment.scheduler.class%
+        arguments: [@service_container]
+
+    domain.appointment.manager:
+        class: %domain.appointment.manager.class%
+        arguments: [@service_container]
+
+    domain.core.event.listener:
+        class: %domain.core.event.listener.class%
+        arguments: [@service_container]
+
+    domain.core.job.manager:
+            class: %domain.core.job.manager.class%
+            arguments: [@service_container]
+
+    domain.core.file_system.video:
+                class: %domain.core.file_system.video.class%
+                arguments: [@service_container]
+
+    domain.core.appointment.video_manager:
+                    class: %domain.core.appointment.video_manager.class%
+                    arguments: [@domain.core.file_system.video]

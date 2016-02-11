@@ -1,0 +1,62 @@
+{% macro top_select(name, data) %}{% spaceless %}
+    {% set current = app.request.get(name) %}
+    <select class="selectpicker " name="{{ name }}">
+        <option value="" {% if current is not defined or current|length == 0 %}selected{% endif %}>All categories</option>
+        {% for industry in data %}
+            <option value="{{ industry.id }}" {% if current is defined and current == industry.id %}selected{% endif %}>{{ industry.name }}</option>
+        {% endfor %}
+    </select>
+{% endspaceless %}{% endmacro %}
+
+{% macro sidebar_checkboxes(block_name, element_name, data, params) %}{% spaceless %}
+
+    {% from 'widgets/rating.html.twig' import rating_widget %}
+
+    {% set checked_array = app.request.get(element_name) %}
+
+    {% set params = {'key':'id', 'value':'name', 'limit': 5, 'data':{}}|merge(params|default({})) %}
+
+    {% set data_len = data|length %}
+    {% set limit = params.limit %}
+
+    {% if data is iterable and data_len > 0 %}
+        <div class="sidebar-list {% if checked_array|length == data_len %}all_tagged{% endif %}" 
+            data-type="{{ element_name }}"
+        >
+            {% if block_name|length != 0 %}
+                <h3><small>{{ block_name }}</small></h3>
+            {% endif %}
+
+            <ul >
+                {% for element in data %}
+                    {% set key = attribute(element, params.key) %}
+                    {% set val = attribute(element, params.value) %}
+                    {% set checked = (key in checked_array) %}
+
+                    <li class="{% if loop.index > limit %}over-limit{% endif %} {% if checked %}tagged{% endif %}">
+                        <input id="{{ element_name }}_{{ key }}" data-title="{{ val }}" 
+                            data-type="{{ element_name }}" type="checkbox" name="{{ element_name }}[]" 
+                            value="{{ key }}" {% if checked %}checked{% endif %}  
+                        />
+                        <label class="small-equivalent {% if element_name == 'rating' %}ratings{% endif %}" 
+                            for="{{ element_name }}_{{ key }}"
+                        >
+                            {% if element_name  == 'rating' %}
+                                {{ rating_widget(element.id) }}
+                                &amp; Up
+                            {% else %}
+                                {{ val }}
+                            {% endif %}
+                            <small class="text-lgrey">({{ element.experts_count }})</small>
+                        </label>
+                    </li>
+                {% endfor %}
+                {% if data_len > limit %}
+                    <li class="show-more"><a >more ({{ data_len - limit }})</a></li>
+                {% endif %}
+
+            </ul>
+        </div>
+    {% endif %}
+
+{% endspaceless %}{% endmacro %}

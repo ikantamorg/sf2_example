@@ -1,0 +1,132 @@
+{% extends 'MainBundle::base.html.twig' %}
+
+{% from 'MainBundle:Expert:widgets/expert.header.html.twig' import expert_header %}
+{% from 'MainBundle:Expert:widgets/expert.tabs.html.twig' import expert_tabs %}
+
+{% block title %}Expert profile view{% endblock %}
+
+{% block yeld %}
+    <div class="clear"></div>
+
+    {{ expert_header(expert) }}
+
+    <div class="clear"></div>
+
+    <!-- container -->
+    <div class="container static-push-top-outer">
+    <div class="tabs">
+
+        {{ expert_tabs(expert) }}
+
+        <div class="">
+            <!-- content-block -->
+            <section style="padding:0;" class="content-block clearfix">
+                <div class="content-block profile clearfix">
+
+                <fieldset class="exp-profile">
+                    <div class="welcome">
+                        <div class="title">Welcome to my profile</div>
+                        <div class="text">
+                            <p>{{ expert.welcomeMessage }}</p>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="header-block">
+                    Summary
+                </div>
+                <fieldset class="exp-profile">
+                    <div class="text">
+                        <p>{{ info.summary }}</p>
+                    </div>
+                </fieldset>
+                {% if expert.experiences %}
+                    <div class="header-block">
+                        Experience
+                    </div>
+                    <fieldset class="exp-profile">
+
+                        {% for expirience in expert.experiences %}
+                            <div class="text">
+                                <div class="box-info">
+                                    <div><span class="black">Company name:</span> {{ expirience.company.name }}</div>
+                                    <div><span class="black">Title:</span> {{ expirience.title }}</div>
+                                    <div>{% if expirience.startDate|date('m-d') != "01-01" %}{{ expirience.startDate|date('F') }} {% endif %}{{ expirience.startDate|date('Y') }} - {% if expirience.isCurrent %}Present{% else %}{% if expirience.startDate|date('m-d') != "01-01" %}{{ expirience.endDate|date('F') }} {% endif %}{{ expirience.endDate|date('Y') }}{% endif %}</div>
+                                    <div class="black">Description:</div>
+                                    <p>{{ expirience.summary }}</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                    </fieldset>
+                {% endif %}
+
+                {% if expert.educations %}
+                    <div class="header-block">
+                        Education
+                    </div>
+                    <fieldset class="exp-profile">
+                        {% for education in expert.educations %}
+                            <div class="text">
+                                <div class="box-info">
+                                    <div><span class="black">School:</span> {{ education.institution.name }}</div>
+                                    <div><span class="black">Dates Attented:</span> {{ education.startDate }}
+                                        - {{ education.endDate }}</div>
+                                    <div><span class="black">Degree:</span> {{ education.degree }}</div>
+                                    <div><span class="black">Field of Study:</span> {{ education.fieldOfStudy }}</div>
+                                    <div><span class="black">Activities and Societies:</span> {{ education.activities }}</div>
+                                    <div class="black">Description:</div>
+                                    <p>{{ education.notes }}</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </fieldset>
+                {% endif %}
+
+                {% if info.birthday or info.interests %}
+                    <div class="header-block">
+                        Aditional Info
+                    </div>
+                    <fieldset class="exp-profile">
+                        <div class="text">
+                            <div class="box-info">
+                                {% if info.interests %}
+                                    <div><span class="black">Interest:</span> {{ info.interests }}</div>
+                                {% endif %}
+                                {% if info.birthday %}
+                                    <div><span class="black">Birthday:</span> {{ info.birthday|date('F d,Y') }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </fieldset>
+                {% endif %}
+
+                {% if expert.skills %}
+                    <div class="header-block">
+                        Skills & Expertise
+                    </div>
+                    <fieldset class="exp-profile">
+                        <div class="text">
+                            <p>
+                                {% for skill in expert.skills %}
+                                    {{ skill.name }}{% if not loop.last %}, {% endif %}
+                                {% endfor %}
+                            </p>
+                        </div>
+                    </fieldset>
+                {% endif %}
+
+        </div>
+    </section>
+
+    </div>
+    </div>
+    </div>
+    <!--/ container -->
+
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/main/js/expert/profile_view.js') }}"></script>
+{% endblock %}

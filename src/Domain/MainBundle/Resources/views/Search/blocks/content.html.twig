@@ -1,0 +1,10 @@
+{% import 'MainBundle:Search:widgets/expert.html.twig' as expert_template %}
+{% include 'MainBundle:Search:blocks/total_result.html.twig' %}
+
+{% for expert in experts %}
+    {{ expert_template.widget(expert) }}
+{% endfor %}
+
+{% if experts.getTotalItemCount == 0 %}
+    No experts found. Please revise your search.
+{% endif %}

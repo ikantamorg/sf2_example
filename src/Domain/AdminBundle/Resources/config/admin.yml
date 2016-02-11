@@ -1,0 +1,45 @@
+services:
+
+    sonata.admin.expert_request:
+        class: Domain\AdminBundle\Admin\ExpertRequestAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label:"Expert Requests" }
+        arguments:
+            - ~
+            - Domain\CoreBundle\Entity\ExpertRequest
+            - 'AdminBundle:ExpertRequestAdmin'
+        calls:
+            - [ setTranslationDomain, [DomainAdminBundle]]
+            - [ setContainer, [ @service_container ] ]
+
+    admin.admin.appointment_problem:
+        class: Domain\AdminBundle\Admin\AppointmentProblemAdmin
+        arguments: [~, Domain\CoreBundle\Entity\AppointmentProblem, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: "Content", label: "Appointments Problems" }
+        calls:
+            - [setSecurityContext, [@security.context]]
+
+    admin.admin.site_preferences:
+        class: Domain\AdminBundle\Admin\SitePreferencesAdmin
+        arguments: [~, Domain\CoreBundle\Entity\AdminSetting, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: "Settings", label: "Site Preferences"}
+
+    admin.admin.paypal_setting:
+        class: Domain\AdminBundle\Admin\PaypalSettingAdmin
+        arguments: [~, Domain\CoreBundle\Entity\AdminSetting, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: "Settings", label: "Paypal Settings"}
+
+    domain.admin.candidates_management:
+        class: Domain\AdminBundle\Admin\CandidatesManagementAdmin
+        arguments: [~, Domain\CoreBundle\Entity\User, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: "Users", label: "Candidates"}
+
+    domain.admin.experts_management3:
+        class: Domain\AdminBundle\Admin\ExpertsManagementAdmin
+        arguments: [~, Domain\CoreBundle\Entity\User, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: "Users", label: "Experts"}

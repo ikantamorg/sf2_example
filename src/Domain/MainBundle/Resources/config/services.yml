@@ -1,0 +1,7 @@
+parameters:
+#    domain_main.example.class: Domain\MainBundle\Example
+
+services:
+#    domain_main.example:
+#        class: %domain_main.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

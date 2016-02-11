@@ -1,0 +1,9 @@
+{% extends 'SonataAdminBundle:CRUD:list.html.twig' %}
+
+{% block batch_actions %}
+    <select name="action" style="width: auto; height: auto">
+        {% for action, options in batchactions %}
+            <option value="{{ action }}">{{ options.label }}</option>
+        {% endfor %}
+    </select>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'CoreBundle:Emails:mail.base.html.twig' %}
+
+{% block yeld %}
+    Hello {{ candidate.fullName }}.
+    <br>
+    <br>
+    You successfully change session's start date with expert "{{  expert_user.fullName }}".
+    <br>
+    <br>
+    Old start date was: {{ oldAppointment.startDate|date(date_time_formats.date_time_with) }} -  {{ oldAppointment.endDate|date(date_time_formats.date_time_with) }} {{ oldAppointment.startDate|date(date_time_formats.timezone) }}
+    <br>
+    Changed session start date is: {{ appointment.startDate|date(date_time_formats.date_time_with) }} - {{ appointment.endDate|date(date_time_formats.date_time_with) }} {{ appointment.startDate|date(date_time_formats.timezone) }}
+{% endblock %}

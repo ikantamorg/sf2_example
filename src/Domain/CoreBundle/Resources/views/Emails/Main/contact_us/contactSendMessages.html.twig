@@ -1,0 +1,10 @@
+{% extends 'CoreBundle:Emails:mail.base.html.twig' %}
+
+{% block yeld %}
+
+    First Name: {{ post.first_name }}<br>
+    Last Name: {{ post.last_name }}<br>
+    Phone: {{ post.phone }}<br>
+    Message: {{ post.message }}
+
+{% endblock %}

@@ -1,0 +1,8 @@
+<div class="steps">
+    <ul>
+        {% for step in steps %}
+            <li class="{% if step.position == current_position %}active{% endif %}">{{ step.position }}. {{ step.name }}
+                {% if not loop.last %}<span>›</span>{% endif %}</li>
+        {% endfor %}
+    </ul>
+</div>

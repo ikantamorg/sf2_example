@@ -1,0 +1,10 @@
+<div class="toolbar">
+    <div class="pull-right textOutput">
+        <p>Select an available day to see open time slots for this Expert</p>
+    </div><!-- /pull-right-->
+</div><!-- /toolbar-->
+<div class="clear"></div>
+<div id="calendar"></div>
+<script>
+    var available_events = {{ events|json_encode|raw }};
+</script>

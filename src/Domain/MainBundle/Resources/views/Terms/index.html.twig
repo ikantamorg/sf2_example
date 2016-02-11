@@ -1,0 +1,32 @@
+{% extends '::base.html.twig' %}
+
+{% block title %} Main {% endblock %}
+
+{% block yeld %}
+    <!-- intro -->
+    <section class="static-push-top-inner">
+        <!-- container -->
+        <div class="container">
+            <article class="text-left title">
+                <h2 class="text-blue">Terms & Conditions</h2>
+                <div class="clear"></div>
+                <hr class="divider" />
+                <div class="clear"></div>
+            </article>
+        </div>
+        <!--/ container -->
+    </section>
+    <!--/ intro -->
+
+    <div class="clear"></div>
+
+    <!-- grey-block -->
+    <article class="inner-b global-push-btm-outer">
+        <!-- container -->
+        <div class="container">
+            {{ body|raw }}
+        </div>
+        <!--/ container -->
+    </article>
+    <!--/ grey-block -->
+{% endblock %}

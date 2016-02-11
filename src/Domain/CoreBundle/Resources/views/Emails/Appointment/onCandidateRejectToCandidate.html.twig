@@ -1,0 +1,5 @@
+{% extends 'CoreBundle:Emails:mail.base.html.twig' %}
+
+{% block yeld %}
+    You successfully cancel your bookins({{  expertUser.fullName }}, {{ appointment.startDate|date(date_time_formats.date_time_with_timezone) }} - {{ appointment.endDate|date(date_time_formats.date_time_with_timezone) }}).
+{% endblock %}

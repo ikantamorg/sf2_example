@@ -1,0 +1,5 @@
+search_expert:
+    pattern:  /experts
+    defaults: { _controller: MainBundle:Search:experts }
+    options:
+            expose: true

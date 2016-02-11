@@ -1,0 +1,38 @@
+<script id="{% block online_element_id %}template-online{% endblock %}" type="text/template">
+    <div class="header-block clearfix">
+        <div class="pull-left">Welcome to the Lobby</div>
+    </div>
+    <div class="clearfix small-padding session-recorder-container">
+        <div id="above-flash"></div>
+        <div class="flashWrapper" id="flash-wrapper">
+            <div id="flash-container">loading...</div>
+        </div>
+        <div id="below-flash">
+            <div class="session_information clearfix">
+                <div class="pull-left">
+                    <h1><%= type %> - <%= date %></h1>
+                    <div class="date-time"><%= time %> (<%= duration %> min) | Server local time: (<%= timezone %>)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script id="{% block session_head_element_id %}template-online-session-head{% endblock %}" type="text/template">
+    <div class="box_2">
+        <div class="header"><%= name %></div>
+    </div>
+</script>
+
+
+<script id="{% block progress_element_id %}template-online-progress{% endblock %}" type="text/template">
+    <div class="progress">
+        <div class="bar" style="width: 0%;"></div>
+        <p></p>
+        <span class="min" id="progress-text"><%= text %></span>
+    </div>
+</script>
+
+<script id="{% block status_element_id %}template-online-status{% endblock %}" type="text/template">
+    <div class="time_elapsed"><strong ><%= inner %></strong></div>
+</script>

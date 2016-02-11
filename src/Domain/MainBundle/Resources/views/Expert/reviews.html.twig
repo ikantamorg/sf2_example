@@ -1,0 +1,65 @@
+{% extends 'MainBundle::base.html.twig' %}
+
+{% from 'MainBundle:Expert:widgets/expert.header.html.twig' import expert_header %}
+{% from 'MainBundle:Expert:widgets/expert.tabs.html.twig' import expert_tabs %}
+{% from 'widgets/rating.html.twig' import rating_widget %}
+
+{% block title %}Expert reviews{% endblock %}
+
+{% block yeld %}
+    <div class="clear"></div>
+
+    {{ expert_header(expert) }}
+
+    <div class="clear"></div>
+
+    <div class="container static-push-top-outer">
+        <div class="tabs">
+
+            {{ expert_tabs(expert) }}
+
+            <div class="blocks">
+                <section class="content-block clearfix" style="display: block">
+                    {% if pagination|length <= 0 %}
+                        Expert has no any reviews yet
+                    {% else %}
+                        <ul class="reviews-list">
+                            {% for review in pagination %}
+                                <li class="parent">
+                                    <p class="text">
+                                        {{ review.review|escape }}
+                                    </p>
+                                    <div class="ratings clearfix">
+                                        <ul class="clearfix">
+                                            <li>
+                                                <p class="pull-left">
+                                                    {{ rating_widget(review.rating) }}
+                                                </p>
+                                                <p class="pull-left number">
+                                                    {{ review.rating|number_format(1) }}
+                                                </p>
+                                                <span class="pull-right information">
+                                                    By:
+                                                    {{ review.candidate.firstName|escape|capitalize }}
+                                                    {{ review.candidate.lastName|escape|capitalize }}
+                                                    -
+                                                    {{ review.createdAt|date('M d, Y') }}
+                                                </span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                        <div class="clear"></div>
+                        <ul class="pagination pull-right inline">
+                            {{ knp_pagination_render(pagination) }}
+                        </ul>
+                    {% endif %}
+                </section>
+
+            </div>
+        </div>
+    </div>
+    
+{% endblock yeld %}

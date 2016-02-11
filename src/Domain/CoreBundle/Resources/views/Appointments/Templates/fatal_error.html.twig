@@ -1,0 +1,14 @@
+<script id="{% block status_element_id %}template-online-falat-error{% endblock %}" type="text/template">
+    <div class="accordion on-finished">
+        <h3 class="active">An error has been encountered...</h3>
+        <div class="accordion-box stick">
+                <p class="text-center error-message"><%= message %></p>
+                <p class="text-center small-margin-top">
+                    To retry the session please click to retry button:
+                    <br/>
+                    <br/>
+                    <a id="retry-session" href="" class="btn blue-btn btn-small">Retry</a>
+                </p>
+            </div>
+    </div>
+</script>

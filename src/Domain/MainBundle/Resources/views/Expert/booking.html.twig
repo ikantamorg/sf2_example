@@ -1,0 +1,69 @@
+{% extends 'CandidateBundle::base.html.twig' %}
+
+{% from 'MainBundle:Expert:widgets/expert.header.html.twig' import expert_header %}
+{% from 'MainBundle:Expert:widgets/expert.tabs.html.twig' import expert_tabs %}
+
+{% block title %}Book Expert{% endblock %}
+
+{% block yeld %}
+
+
+    <div class="clear"></div>
+
+    {{ expert_header(expert) }}
+
+    <div class="clear"></div>
+
+    <!-- container -->
+    <div class="container static-push-top-outer">
+    <div class="tabs">
+        {{ expert_tabs(expert) }}
+
+    <div class="blocks">
+        <!-- content-block -->
+        <section id="sc_0" class="content-block clearfix" style="display:block;">
+            {{ steps_map|raw }}
+            <!-- /steps-->
+            <div class="clear"></div>
+            {% if errors|length > 0 %}
+                <div class="alert alert-error">
+                    <p>
+                        {% for error in errors %}
+                            {{ error }}{% if not loop.last %}<br>{% endif %}
+                        {% endfor %}
+                    </p>
+                    <button data-dismiss="alert" class="close" type="button"><i class="icon-alert-x"></i></button>
+                </div>
+                <div class="clear"></div>
+            {% endif %}
+
+            {{ content|raw }}
+        </section>
+        <!--/ content-block -->
+
+    </div>
+    </div>
+    </div>
+
+    <script>
+        var booking_step = {{ booking_step }};
+    </script>
+    <!--/ container -->
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% for style in content_css %}
+        <link rel="stylesheet" type="text/css" href="{{ asset(style) }}">
+    {% endfor %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/main/js/expert/booking.js') }}"></script>
+
+    {% for js in content_js %}
+        <script src="{{ asset(js) }}"></script>
+    {% endfor %}
+
+{% endblock %}

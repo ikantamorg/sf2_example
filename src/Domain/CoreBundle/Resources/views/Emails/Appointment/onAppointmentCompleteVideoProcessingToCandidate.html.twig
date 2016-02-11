@@ -1,0 +1,11 @@
+{% extends 'CoreBundle:Emails:mail.base.html.twig' %}
+
+{% block yeld %}
+    Hello {{ candidate.fullName }}.
+    <br>
+    <br>
+    The session's video with {{  expert_user.fullName }} ({{ appointment.startDate|date(date_time_formats.date_time_with_timezone) }} -  {{ appointment.endDate|date(date_time_formats.date_time_with_timezone) }}) was successfully Processed.
+    <br>
+    <br>
+    <a href="{{ url('candidate_after_appointment_index', {appointmentId: appointment.id}) }}">View</a> it or <a href="{{ download_url }}">download</a>.
+{% endblock %}

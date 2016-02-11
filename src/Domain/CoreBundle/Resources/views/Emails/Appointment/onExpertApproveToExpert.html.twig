@@ -1,0 +1,5 @@
+{% extends 'CoreBundle:Emails:mail.base.html.twig' %}
+
+{% block yeld %}
+    Hello. Your successfully approve booking({{ candidate.fullName }}, {{ appointment.startDate|date(date_time_formats.date_time_with_timezone) }} - {{ appointment.endDate|date(date_time_formats.date_time_with_timezone) }}). Thanks. Good Luck. Bye.
+{% endblock %}

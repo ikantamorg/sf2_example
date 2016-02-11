@@ -1,0 +1,63 @@
+{% extends 'CandidateBundle::base.html.twig' %}
+
+{% block title %}Lobby with - {{ opponent_name }}{% endblock %}
+
+
+{% block yeld %}
+    <div class="container static-push-top-outer">
+        <section id="video-container" class="content-block lobbi-block clearfix">
+
+        </section>
+        <div class="accordion">
+            {% if appointment.typeInterview and appointment.otherInfo %}
+                <h3 class="">Short Description <i class="arrow"></i></h3>
+                <div class="accordion-box">{{ appointment.otherInfo|escape }}</div>
+            {% endif %}
+
+            {% if appointment.resume %}
+                <h3 class="">Resume <i class="arrow"></i></h3>
+                <div class="accordion-box">{{ appointment.resume|raw }}</div>
+            {% endif %}
+
+            {% if appointment.resumeFile %}
+                <h3 class="">Attached Resume <i class="arrow"></i></h3>
+                <div class="accordion-box">
+                    <a href="{{ path('main_file_resume_download', {appointmentId: appointment.id}) }}">
+                        {{ appointment.resumeFile.name }}
+                    </a>
+                </div>
+            {% endif %}
+
+            {% if appointment.jobDescription %}
+                <h3 class="">Job descripton <i class="arrow"></i></h3>
+                <div class="accordion-box">{{ appointment.jobDescription|escape }}</div>
+            {% endif %}
+
+            {% if not appointment.typeInterview and appointment.otherInfo %}
+                <h3 class="">Other info <i class="arrow"></i></h3>
+                <div class="accordion-box">{{ appointment.otherInfo|escape }}</div>
+            {% endif %}
+        </div>
+    </div>
+
+    {% embed "CoreBundle:Appointments:Templates/online.html.twig" %}{% endembed %}
+    {% embed "CoreBundle:Appointments:Templates/fatal_error.html.twig" %}{% endembed %}
+
+    <script id="tempalte-on-session-finished" type="text/template">
+        <div class="accordion on-finished">
+            <h3 class="active">The session has been ended</h3>
+            <div class="accordion-box stick">
+                {% embed finished_template ~".html.twig" %}{% endembed %}
+            </div>
+        </div>
+    </script>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        var pageSettings = {{ page_settings|json_encode|raw }};
+    </script>
+    {{ parent() }}
+    <script src="{{ asset('bundles/core/js/appointments/online.js') }}"></script>
+{% endblock %}

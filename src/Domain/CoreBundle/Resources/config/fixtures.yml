@@ -1,0 +1,167 @@
+Domain\CoreBundle\Entity\Institution:
+    institution{1..20}:
+        name (unique): <company()>
+
+Domain\CoreBundle\Entity\Industry:
+    industry{1..40}:
+        name (unique): <sentence(2)>
+
+Domain\CoreBundle\Entity\Company:
+    company{1..20}:
+        name (unique): <company()>
+        industries: <numberBetween(1, 3)>x @industry*
+
+Domain\CoreBundle\Entity\Skill:
+    skill{1..50}:
+        name (unique): <bs()>
+
+Domain\CoreBundle\Entity\Location:
+    location{1..50}:
+        name (unique): <country()>
+        code: <stateAbbr()>
+
+Domain\CoreBundle\Entity\User:
+    user{1..100}:
+        username (unique): <username()>
+        usernameCanonical: $username
+        email (unique): <email()>
+        emailCanonical: $email
+        enabled: 1
+        salt: 1
+        password: 1
+        locked: 0
+        expired: 0
+        roles: ['ROLE_EXPERT']
+        credentialsExpired: 0
+        first_name: <firstName()>
+        last_name: <lastName()>
+        terms: 1
+        avatar: @image<current()>
+
+Domain\CoreBundle\Entity\File:
+    file{1..100}:
+        name: <image('./web/upload/temp/', 400, 400)>
+        size: <numberBetween(20, 800)>
+        type: 'image/jpg'
+        path: '/upload/temp/'
+        user: @user<current()>
+
+Domain\CoreBundle\Entity\Image:
+    image{1..100}:
+        file: @file<current()>
+        width: 400
+        height: 400
+        x: 0
+        y: 0
+        x2: 400
+        y2: 400
+        updated: <dateTime()>
+        user: @user<current()>
+
+Domain\CoreBundle\Entity\Expert:
+    expert{1..100}:
+        active: 1
+        welcomeMessage: <text()>
+        price: <numberBetween(20, 200)>
+        user: @user<current()>
+        skills: <numberBetween(1, 10)>x @skill*
+        industry: @industry*
+        location: @location*
+        averageRating: <randomFloat(2, 1, 5)>
+
+Domain\CoreBundle\Entity\AdditionalExpertInfo:
+    additionalexpertinfo{1..100}:
+        birthday: <dateTime()>
+        summary: <text(100)>
+        interests: <text(100)>
+        expert: @expert<current()>
+        first_name: <firstName()>
+        last_name: <lastName()>
+        headline: <text(50)>
+
+Domain\CoreBundle\Entity\Education:
+    education{1..100}:
+        activities: <text(100)>
+        degree: <text(50)>
+        fieldOfStudy: <bs()>
+        notes: <text()>
+        startDate: <numberBetween(1970, 2000)>
+        endDate: <numberBetween(1970, 2000)>
+        expert: @expert<current()>
+        institution: @institution*
+
+Domain\CoreBundle\Entity\Experience:
+    Experience{1..100}:
+        title: <text(50)>
+        summary: <text()>
+        expert: @expert<current()>
+        company: @company*
+
+Domain\CoreBundle\Entity\ExpertSchedule:
+    schedule{1..100}:
+        day: <numberBetween(1, 7)>
+        startTime: <dateTime()>
+        endTime: <dateTimeBetween($startTime, '+3 hour')>
+        expert: @expert<current()>
+
+Domain\CoreBundle\Entity\ExpertBilling:
+    billing{1..100}:
+        email: @user<current()>->email
+        expert: @expert<current()>
+        firstName: @user<current()>->firstName
+        lastName: @user<current()>->lastName
+        active: 1
+
+Domain\CoreBundle\Entity\Transaction:
+    transaction{1..300}:
+        expert: @expert*
+        candidate: @user*
+        payKey: <uuid()>
+        createdAt: <dateTime()>
+        updatedAt: <dateTime()>
+        amountToAdmin: <randomFloat(2, 10, 100)>
+        amountToExpert: <randomFloat(2, 10, 100)>
+        currency: USD
+        status: COMPLETED
+        attempt: 1
+        details: <text(200)>
+
+Domain\CoreBundle\Entity\Appointment:
+    appointment{1..300}:
+        transaction: @transaction<current()>
+        expert: @transaction<current()>->expert
+        candidate: @transaction<current()>->candidate
+        type: <randomNumber(0, 1)>
+        startDate: <dateTime()>
+        endDate: <dateTimeBetween($startDate, '+3 hour')>
+        totalPrice: <randomNumber(1, 100)>
+        status: 5
+        resume: <text(200)>
+        jobDescription: <text(200)>
+        otherInfo: <text(200)>
+
+Domain\CoreBundle\Entity\AppointmentProblem:
+    appointmentproblemcandidate{1..300}:
+        appointment: @appointment<current()>
+        user: @appointment<current()>->candidate
+        message: <text(200)>
+
+Domain\CoreBundle\Entity\Review:
+    review{1..300}:
+        appointment: @appointment<current()>
+        expert: @appointment<current()>->expert
+        candidate: @appointment<current()>->candidate
+        rating: <randomNumber(1, 5)>
+        review: <text(200)>
+        createdAt: <dateTime()>
+        updatedAt: <dateTime()>
+
+Domain\CoreBundle\Entity\Feedback:
+    feedback{1..300}:
+        appointment: @appointment<current()>
+        expert: @appointment<current()>->expert
+        candidate: @appointment<current()>->candidate
+        strongPoints: <text(200)>
+        weakPoints: <text(200)>
+        decision: <text(200)>
+        additional: <text(200)>

@@ -1,0 +1,30 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Session was successfully booked{% endblock %}
+
+{% block yeld %}
+
+
+    <!-- container -->
+    <div class="container static-push-top-outer small-padding">
+        <p class="text-center">
+            <img src="{{ asset('images/after-pay.png') }}" alt=""/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <a class="btn blue-btn big-square-button" href="{{ url('candidate_appointments_index') }}">Go to My Sessions</a>
+            <br/>
+            <br/>
+            <br/>
+        </p>
+
+    </div>
+
+
+    <!--/ container -->
+{% endblock %}
+
+
+
+

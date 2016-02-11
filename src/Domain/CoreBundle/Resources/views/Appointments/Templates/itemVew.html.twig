@@ -1,0 +1,82 @@
+<script id="{% block element_id %}template-list-item{% endblock %}" type="text/template">
+    <div class="appointment-item-container" data-date="<%= date.startDate %>">
+        <div class="section-block full-box-loader <%= status %>">
+            <div class="date-block">
+                <%= date.opt.monthName %>
+                <strong><%= date.opt.dateNum %></strong>
+                <%= date.opt.dayName %>
+            </div>
+            <div class="date-information">
+                <div class="time"><i class="time-icon"></i>
+                    <%= date.startDateText %> &nbsp;&nbsp;&nbsp;
+                    <%= date.opt.timeFrom %> - <%= date.opt.timeTo %> (<%= duration
+                    %> min) <span class="price"> $<%= totalPrice %> </span>
+                </div>
+                <span class="status"> <i></i> <%= textStatus %></span> <%= opponent_name %> <span
+                    class="separator">|</span> <%= type %>
+            </div>
+            <!-- /date-information-->
+            <div class="button-block">
+                <% if (permissions.change_date) { %>
+                <div class="btn edit_date" data-view-action="show-edit-date">
+                    <i class="fon"></i>Edit date
+                </div>
+                <% } %>
+                <% if (permissions.cancel) { %>
+                <div class="btn cancel" data-model-action="cancel"><i></i><%= links.cancel.title %></div>
+                <% } %>
+                <% if (permissions.approve) { %>
+                <div class="btn btn-primary" data-model-action="approve"><%= links.approve.title %></div>
+                <% } %>
+                <% if (running) { %>
+                       <span>Time left:
+                           <strong data-countdown></strong>
+                           <a href="<%= links.online.uri %>" class="go-online">
+                               <i class="play"></i>
+                           </a>
+                       </span>
+                <% } else if(!_.isUndefined(links.online)) { %>
+                <a href="<%= links.online.uri %>" class="go-online">
+                    <i class="play"></i>
+                </a>
+                <% } %>
+                <% if (permissions.download_video) { %>
+                <a href="<%= links.download_video.uri %>">
+                    <div class="btn"><%= links.download_video.title %></div>
+                </a>
+                <% } %>
+                <% if (permissions.read_feedback) { %>
+                <a href="<%= links.read_feedback.uri %>">
+                    <div class="btn"><%= links.read_feedback.title %></div>
+                </a>
+                <% } %>
+                <% if (permissions.write_feedback) { %>
+                <a href="<%= links.write_feedback.uri %>">
+                    <div class="btn"><%= links.write_feedback.title %></div>
+                </a>
+                <% } %>
+            </div>
+            <div class="clear"></div>
+        </div><!-- /section-block-->
+
+        <% if (permissions.change_date) { %>
+            <div class="section-child change-date-block">
+                <div class="pull-left">
+                    <label>Select Date</label>
+                    <input type="text" class="datepicker" >
+                </div>
+                <div class="pull-left">
+                    <label>Select Time</label>
+                    <div class="control select_customer">
+                        <select class="select_block"></select>
+                    </div>
+                </div>
+                <div class="pull-right button-block">
+                    <div class="btn edit-cancel" data-view-action="hide-edit-date">Cancel</div>
+                    <input data-model-action="change_date" type="submit" class="btn blue-btn" value="Save">
+                </div>
+                <div class="clear"></div>
+            </div><!-- /section-child-->
+        <% } %>
+    </div>
+</script>

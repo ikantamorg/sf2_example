@@ -1,0 +1,72 @@
+{% extends 'MainBundle::base.html.twig' %}
+
+{% block title %} Sign in {% endblock %}
+
+{% block yeld %}
+
+    {% if error %}
+        <div class="alert alert-error outer-btm-none dtable">
+            <p>{{ error.message }}</p>
+            <button type="button" class="close" data-dismiss="alert"><i class="icon-alert-x"></i></button>
+        </div>
+    {% endif %}
+
+    <!-- container -->
+    <div class="container">
+
+        <h2 class="text-center cf inner-tb outer-btm-none">Login</h2>
+
+        <form class="form-signin clearfix" novalidate="novalidate"  action="{{ path('login_check') }}" method="post" {{ form_enctype(form) }}>
+
+            <div class="control-group text-center">
+                <a href="{{ path('hwi_oauth_connect') }}linkedin" class="btn btn-large">
+                    <small class="inner-btn left"><i class="icon-linkedIn"></i></small>
+                    <span>Sign in with <strong>LinkedIn</strong></span>
+                </a>
+            </div>
+
+            <p class="or"><span>or</span></p>
+
+            <div class="control-group {% if error %}error-field{% endif %}">
+                {{ form_custom_errors.widget(form.email) }}
+                {{ form_custom_labels.widget(form.email) }}
+                {% if error %}
+                    <span class="error">
+						Please Check Your Email<i class="icon-error-arr"></i>
+					</span>
+                {% endif %}
+                <div class="controls">
+                    {{ form_widget(form.email) }}
+                </div>
+            </div>
+
+            <div class="control-group {% if error %}error-field{% endif %}">
+                {{ form_custom_errors.widget(form.password) }}
+                {{ form_custom_labels.widget(form.password) }}
+                {% if error %}
+                    <span class="error">
+						Please Check Your Password<i class="icon-error-arr"></i>
+					</span>
+                {% endif %}
+                <div class="controls">
+                    {{ form_widget(form.password) }}
+                </div>
+            </div>
+
+        	<span class="pull-left">
+        		<a class="inner-tb-10" href="{{ path('forgotten_password') }}">Forgot Password</a>
+	        </span>
+
+            {{ form_widget(form._token) }}
+
+            <button class="btn blue-btn pull-right outer-top-none" type="submit">Login</button>
+
+        </form>
+
+    </div>
+    <!--/ container -->
+
+{% endblock %}
+
+
+{% block footer %} {% endblock %}

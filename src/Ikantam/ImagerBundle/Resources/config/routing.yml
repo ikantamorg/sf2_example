@@ -1,0 +1,35 @@
+domain_imager_generator:
+    pattern: /imager/generate/
+    defaults: { _controller: IkantamImagerBundle:ImagePreset:index }
+
+domain_image_uploading:
+    pattern: /imager/upload/
+    defaults: { _controller: IkantamImagerBundle:Uploading:index }
+
+domain_image_fileUpload:
+    pattern: /imager/handle_upload/
+    defaults: { _controller: IkantamImagerBundle:Uploading:upload }
+
+domain_image_fileUploadAlternative:
+    pattern: /imager/handle_upload/alternative
+    defaults: { _controller: IkantamImagerBundle:Uploading:uploadAlternative }
+    options:
+            expose: true
+
+domain_image_crop_url:
+    pattern: /imager/crop_image
+    defaults: { _controller: IkantamImagerBundle:Uploading:crop }
+
+domain_image_crop_alt_url:
+    pattern: /imager/crop_image/alternative
+    defaults: { _controller: IkantamImagerBundle:Uploading:cropAlternative }
+    options:
+        expose: true
+
+domain_image_get_cropped_url:
+    pattern: /imager/get_cropped_image
+    defaults: { _controller: IkantamImagerBundle:Uploading:getCroppedImage}
+
+delete_image_url:
+   pattern: /imager/delete_image
+   defaults: { _controller: IkantamImagerBundle:Imager:deleteImage }

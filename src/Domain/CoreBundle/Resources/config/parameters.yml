@@ -1,0 +1,21 @@
+# This file is auto-generated during the composer install
+parameters:
+
+    expert.search.price_groups:
+        gr_1: { min: 0, max: 100, name: $0-$100}
+        gr_2: { min: 101, max: 200, name: $101-$200}
+        gr_3: { min: 201, max: 300, name: $201-$300}
+        gr_4: { min: 301, max: 400, name: $301-$400}
+        gr_5: { min: 401, max: 500, name: $401-$500}
+        gr_6: { max: 501, name: Over $500}
+
+
+    payment:
+        route_success: 'payment_success'
+        route_cancel: 'payment_cancel'
+        route_ipn: 'payment_ipn'
+
+    expert.max_rating: 5
+
+    expert.search:
+            availability: +14 days

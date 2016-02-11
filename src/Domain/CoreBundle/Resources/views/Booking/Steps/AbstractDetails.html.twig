@@ -1,0 +1,17 @@
+<div style="font-size:22px; padding-bottom:5px;">{{ appointment_type }}</div>
+<div class="date-time-line">
+    <span><i class="cd-icon"></i> {{ start_date|date('F j, Y') }}</span> &nbsp;|&nbsp;
+    <span><i class="clock-icon"></i> {{ start_date|date('g:iA') }} - {{ end_date|date('g:iA') }} ({{ date_diff }} min)</span>
+</div>
+<form action="" method="post" autocomplete="off" novalidate>
+    {% block form_body %}
+    {% endblock %}
+    {% block hidden_form_fields %}
+        <input type="hidden" name="booking[step]" value="{{ step }}"/>
+        <input type="hidden" name="booking[prefered_step]" value="{{ step+1 }}"/>
+        <input type="hidden" name="booking[data]" value="1" />
+
+        {{ form_rest(form) }}
+    {% endblock %}
+
+</form>

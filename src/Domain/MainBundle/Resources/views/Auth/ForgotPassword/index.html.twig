@@ -1,0 +1,45 @@
+{% extends 'MainBundle::base.html.twig' %}
+
+{% block title %}Forgot Password{% endblock %}
+
+{% block yeld %}
+
+    <!-- container -->
+    <div class="container">
+
+        <h2 class="text-center cf inner-tb outer-btm-none">Forgot Password</h2>
+        <h3 class="text-center">
+            <small>
+                Please enter the email address you registered with and we will use it to email you a new password
+            </small>
+        </h3>
+
+        <form class="form-signin clearfix"  action="{{ path('forgotten_password') }}" method="post"  {{ form_enctype(form) }} novalidate="novalidate" autocomplete="off">
+
+            <div class="control-group {% if errors|length > 0 %}error-field{% endif %}">
+                {% if errors|length > 0 %}
+                    {% for error in errors %}
+                        <span class="error">
+						    {{ error }}<i class="icon-error-arr"></i>
+					    </span>
+                    {% endfor %}
+                {% endif %}
+                {{ form_custom_labels.widget(form.email) }}
+                <div class="controls">
+                    {{ form_widget(form.email) }}
+                </div>
+            </div>
+
+            {{ form_rest(form) }}
+
+            <button class="btn blue-btn pull-right outer-top-none" type="submit">Send</button>
+        </form>
+
+    </div>
+    <!--/ container -->
+{% endblock %}
+
+{% block footer %} {% endblock %}
+
+
+

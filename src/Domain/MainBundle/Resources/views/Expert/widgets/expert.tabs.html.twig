@@ -1,0 +1,8 @@
+{% macro expert_tabs(expert) %}{% spaceless %}
+
+    {% set menuItem = knp_menu_get('CoreBundle:Builder:expertsPublicTabs', [], {'expert_id': expert.id}) %}
+
+    <div class="navigation">
+        {{ knp_menu_render(menuItem, {}, 'tabs') }}
+    </div>
+{% endspaceless %}{% endmacro %}

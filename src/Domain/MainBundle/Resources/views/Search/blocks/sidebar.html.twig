@@ -1,0 +1,5 @@
+{% from 'MainBundle:Search:widgets/search_widgets.html.twig' import sidebar_checkboxes %}
+
+{% for type, filter in sidebar_data %}
+    {{ sidebar_checkboxes(filter.head_title, type, filter.data ) }}
+{% endfor %}

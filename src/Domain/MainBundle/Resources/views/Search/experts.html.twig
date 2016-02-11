@@ -1,0 +1,92 @@
+{% extends 'MainBundle::base.html.twig' %}
+
+{% block title %}Find an expert{% endblock %}
+
+{% from 'MainBundle:Search:widgets/search_widgets.html.twig' import top_select %}
+
+{% block yeld %}
+    <div class="clear"></div>
+
+    <!-- filter-block -->
+    <div class="filter-block">
+        <!-- container -->
+        <div class="container">
+            <h4 class="pull-left">Find an Expert</h4>
+            <div class="search-field pull-right clearfix">
+                <form method="get" action="{{ path('search_expert') }}" id="top-form">
+                    <div class="field-block pull-left clearfix">
+                        <input type="text" placeholder="Add job title or keyword" name="search" value="{{ app.request.get('search', '') }}"/>
+                        <div class="btn-group pull-left">
+                            {{ top_select('top_category', industries) }}
+                        </div>
+                    </div>
+                    <button class="btn blue-btn pull-right" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+        <!--/ container -->
+    </div>
+    <!--/ filter-block -->
+
+    <!-- filter-tags -->
+    <div class="filter-tags inner-tb-10 {% if actived_filters|length == 0 %}hidden{% endif %}" id="filter-list">
+        <div class="container">
+            <span class="filters">
+                {% for filter in actived_filters %}
+                    <span class="tag" data-filter-type="{{ filter.type }}" data-filter-id="{{ filter.id }}">
+                        {{ filter.title }}
+                        <button class="remove-tag" type="button"><i class="icon-grey-x"></i></button>
+                    </span>
+                {% endfor %}
+            </span>
+            <a class="clear-tags" href="#">clear all filter</a>
+        </div>
+    </div>
+    <!--/ filter-tags -->
+
+    <div class="clear"></div>
+
+    <!-- container -->
+    <div class="container static-push-top-outer">
+    <!-- content-block -->
+    <section class="content-block clearfix">
+
+    <!-- sidebar -->
+    <aside class="sidebar pull-left" id="sidebar">
+        <form autocomplete="off" id="sidebar-form">
+            {% include include.sidebar %}
+        </form>
+    </aside>
+    <!--/ sidebar -->
+
+    <!-- contents -->
+    <div class="contents pull-right" id="contents">
+        {% include include.content %}
+    </div>
+    <!--/ contents -->
+
+    <div class="clear"></div>
+
+    <ul class="pagination pull-right inline" id="pagination">
+        {% include include.pagination %}
+    </ul>
+
+    </section>
+    <!--/ content-block -->
+    </div>
+    <!--/ container -->
+
+    <div class="clear"></div>
+
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap-select.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/grey.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/main/js/search/expert.js') }}"></script>
+{% endblock %}

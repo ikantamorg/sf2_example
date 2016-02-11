@@ -1,0 +1,14 @@
+{% extends 'CoreBundle:Emails:mail.base.html.twig' %}
+
+{% block yeld %}
+    Hello {{ user.fullName }},
+    <br/>
+    Admin locked your account.
+    {% if(reason|length > 0) %}
+        <br>
+        <br>
+        Reason:
+        <br>
+        {{ reason }}
+    {% endif %}
+{% endblock %}

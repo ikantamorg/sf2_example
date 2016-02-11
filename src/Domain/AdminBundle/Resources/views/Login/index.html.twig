@@ -1,0 +1,29 @@
+{% extends 'MainBundle::base.html.twig' %}
+
+{% block title %}Admin Login{% endblock %}
+
+{% block yeld %}
+
+    <!-- container -->
+    <div class="container">
+
+        <h2 class="text-center cf inner-tb outer-btm-none"> Admin Login</h2>
+
+        <form action="{{ url('admin_check_login') }}" method="post" {{ form_enctype(form) }}>
+            {% if error %}
+                <div  class="alert alert-error">{{ error.message }}</div>
+            {% endif %}
+            {{ form_widget(form) }}
+            <br>
+            <input type="submit" value="Login" class="btn btn-primary" />
+        </form>
+
+    </div>
+    <!--/ container -->
+
+{% endblock %}
+
+{% block footer %} {% endblock %}
+
+
+

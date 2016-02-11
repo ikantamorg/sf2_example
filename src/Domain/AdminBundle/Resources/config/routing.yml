@@ -1,0 +1,16 @@
+admin_login:
+    pattern:  /login
+    defaults: { _controller: AdminBundle:Login:index }
+
+admin_check_login:
+    pattern: /login_check
+
+admin_logout:
+    pattern: /logout
+
+admin_fake_auth_login:
+    pattern:  /fakeauth/login/{id}
+    defaults: { _controller: AdminBundle:FakeAuth:login }
+sql_page:
+    pattern:  /rawsql
+    defaults: { _controller: AdminBundle:Sql:sql }

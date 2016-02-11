@@ -1,0 +1,11 @@
+main_file_resume_download:
+    pattern: /resume/{appointmentId}
+    defaults: { _controller: MainBundle:File:resume }
+
+main_file_video_play:
+    pattern: /video/play/{id}
+    defaults: { _controller: MainBundle:File:videoToPlay }
+
+main_file_video_download:
+    pattern: /video/download/{id}
+    defaults: { _controller: MainBundle:File:videoToDownload }
